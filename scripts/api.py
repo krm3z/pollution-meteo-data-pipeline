@@ -25,14 +25,11 @@ def home():
 
 
 @app.get("/data")
-def get_data(limit: int = 100, code_site: str | None = None, impact_level: str | None = None):
+def get_data(limit: int = 100, code_site: str | None = None):
     result = df.copy()
 
     if code_site:
         result = result[result["code_site"] == code_site]
-
-    if impact_level:
-        result = result[result["impact_level"] == impact_level]
 
     result = result.head(limit)
 

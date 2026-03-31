@@ -102,6 +102,9 @@ df_meteo["datetime"] = pd.to_datetime(df_meteo["datetime"], errors="coerce")
 for col in ["latitude", "longitude", "temperature", "humidity", "wind_speed", "pressure"]:
     df_meteo[col] = pd.to_numeric(df_meteo[col], errors="coerce")
 
+    # Conversion Kelvin -> Celsius
+df_meteo["temperature"] = (df_meteo["temperature"] - 273.15).round(2)
+
 df_meteo = df_meteo.dropna(subset=["datetime", "latitude", "longitude"])
 df_meteo = df_meteo.drop_duplicates()
 

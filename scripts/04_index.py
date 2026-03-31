@@ -69,16 +69,6 @@ df["impact_index"] = df["impact_index"].clip(0, 100).round(2)
 
 df = df.dropna(subset=["impact_index"])
 
-def classify_impact(x):
-    if x <= 25:
-        return "faible"
-    elif x <= 50:
-        return "modere"
-    elif x <= 75:
-        return "eleve"
-    return "critique"
-
-df["impact_level"] = df["impact_index"].apply(classify_impact)
 
 # =========================
 # 7. GARDER SEULEMENT LE NECESSAIRE
@@ -91,16 +81,11 @@ final_cols = [
     "longitude_pollution",
     "station_meteo",
     "distance_km",
-    "NO2",
-    "O3",
-    "PM10",
-    "PM25",
     "temperature",
     "humidity",
     "wind_speed",
     "pressure",
-    "impact_index",
-    "impact_level"
+    "impact_index"
 ]
 
 # garder seulement les colonnes existantes
@@ -111,7 +96,6 @@ df = df[final_cols].copy()
 # 8. ARRONDIS
 # =========================
 for col in [
-    "NO2", "O3", "PM10", "PM25",
     "temperature", "humidity", "wind_speed", "pressure",
     "distance_km", "latitude_pollution", "longitude_pollution",
     "impact_index"
@@ -133,7 +117,6 @@ df["datetime"] = pd.to_datetime(df["datetime"], errors="coerce").dt.strftime("%Y
 
 # colonnes numériques : remplacement par médiane
 numeric_fill_cols = [
-    "NO2", "O3", "PM10", "PM25",
     "temperature", "humidity", "wind_speed", "pressure",
     "distance_km", "latitude_pollution", "longitude_pollution",
     "impact_index"
@@ -147,7 +130,7 @@ for col in numeric_fill_cols:
 
 # colonnes texte : remplacement par valeur explicite
 text_fill_cols = [
-    "code_site", "nom_site", "station_meteo", "impact_level"
+    "code_site", "nom_site", "station_meteo"
 ]
 
 for col in text_fill_cols:
