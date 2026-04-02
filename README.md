@@ -138,5 +138,4 @@ API construite avec **FastAPI**
 
 ## 👤 Auteur
 
-Kerem Uysal  
-Étudiant en Bachelor Informatique – Ynov Lyon  
+Kerem Uysal
